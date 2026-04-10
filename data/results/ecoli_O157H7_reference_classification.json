@@ -1,0 +1,41 @@
+{
+  "sample": "ecoli_O157H7_reference",
+  "categories": [
+    {
+      "category": "Adherence",
+      "unique_genes": 1,
+      "hit_count": 1,
+      "mean_identity": 92.16,
+      "mean_coverage": 0.08,
+      "tpm": 1000000.0,
+      "risk_level": "High",
+      "gene_names": [
+        "fdeC"
+      ]
+    },
+    {
+      "category": "Exotoxin",
+      "unique_genes": 1,
+      "hit_count": 1,
+      "mean_identity": 99.95,
+      "mean_coverage": 10.26,
+      "tpm": 1000000.0,
+      "risk_level": "High",
+      "gene_names": [
+        "toxB"
+      ]
+    },
+    {
+      "category": "Other",
+      "unique_genes": 1,
+      "hit_count": 1,
+      "mean_identity": 96.97,
+      "mean_coverage": 0.07,
+      "tpm": 1000000.0,
+      "risk_level": "Low",
+      "gene_names": [
+        "gb|U00096.1|+|2484373-2487967|ARO:3000833|evgS"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,278 @@
+2026-02-19 20:19:46,067 | alignment.wrapper              | INFO     | Parsed 3 hits from C:\Users\38099\AppData\Local\Temp\pytest-of-38099\pytest-0\test_parse_count0\test.blast6
+2026-02-19 20:19:46,073 | alignment.wrapper              | INFO     | Parsed 3 hits from C:\Users\38099\AppData\Local\Temp\pytest-of-38099\pytest-0\test_parse_fields0\test.blast6
+2026-02-19 20:19:46,089 | alignment.wrapper              | INFO     | Parsed 3 hits from C:\Users\38099\AppData\Local\Temp\pytest-of-38099\pytest-0\test_identity_filter0\test.blast6
+2026-02-19 20:19:46,104 | alignment.wrapper              | INFO     | Filtered to 2 / 3 hits (identity>=70.0%, coverage>=0.0%)
+2026-02-19 20:19:46,134 | alignment.wrapper              | INFO     | Parsed 3 hits from C:\Users\38099\AppData\Local\Temp\pytest-of-38099\pytest-0\test_coverage_filter0\test.blast6
+2026-02-19 20:19:46,134 | alignment.wrapper              | INFO     | Filtered to 2 / 3 hits (identity>=0.0%, coverage>=60.0%)
+2026-02-19 20:19:46,171 | alignment.wrapper              | INFO     | Parsed 3 hits from C:\Users\38099\AppData\Local\Temp\pytest-of-38099\pytest-0\test_combined_filter0\test.blast6
+2026-02-19 20:19:46,171 | alignment.wrapper              | INFO     | Filtered to 1 / 3 hits (identity>=90.0%, coverage>=60.0%)
+2026-02-19 20:19:46,177 | alignment.wrapper              | INFO     | Filtered to 0 / 0 hits (identity>=70.0%, coverage>=50.0%)
+2026-02-19 20:19:47,257 | classifier.pathogenicity       | INFO     | PathogenicityClassifier initialised
+2026-02-19 20:19:47,766 | classifier.pathogenicity       | INFO     | Classified sample_id=1 into 4 categories
+2026-02-19 20:19:49,398 | classifier.pathogenicity       | INFO     | PathogenicityClassifier initialised
+2026-02-19 20:19:49,623 | classifier.pathogenicity       | INFO     | Classified sample_id=1 into 4 categories
+2026-02-19 20:19:50,845 | classifier.pathogenicity       | INFO     | PathogenicityClassifier initialised
+2026-02-19 20:19:51,195 | classifier.pathogenicity       | INFO     | Classified sample_id=1 into 4 categories
+2026-02-19 20:19:51,672 | classifier.pathogenicity       | INFO     | PathogenicityClassifier initialised
+2026-02-19 20:19:51,814 | classifier.pathogenicity       | INFO     | Classified sample_id=1 into 4 categories
+2026-02-19 20:19:52,385 | classifier.pathogenicity       | INFO     | PathogenicityClassifier initialised
+2026-02-19 20:19:52,449 | classifier.pathogenicity       | INFO     | Classified sample_id=1 into 4 categories
+2026-02-19 20:19:52,831 | classifier.pathogenicity       | INFO     | PathogenicityClassifier initialised
+2026-02-19 20:19:52,895 | classifier.pathogenicity       | INFO     | Classified sample_id=1 into 4 categories
+2026-02-19 20:19:53,309 | classifier.pathogenicity       | INFO     | PathogenicityClassifier initialised
+2026-02-19 20:19:53,356 | classifier.pathogenicity       | INFO     | Classified sample_id=1 into 4 categories
+2026-02-19 20:19:53,388 | classifier.pathogenicity       | INFO     | Classified sample_id=1 into 4 categories
+2026-02-19 20:19:53,388 | classifier.pathogenicity       | INFO     | Comparison complete: 4 categories across samples 1 vs 1
+2026-02-19 20:19:53,771 | classifier.pathogenicity       | INFO     | PathogenicityClassifier initialised
+2026-02-19 20:19:53,819 | classifier.pathogenicity       | INFO     | Classified sample_id=1 into 4 categories
+2026-02-19 20:19:53,850 | classifier.pathogenicity       | INFO     | Classified sample_id=1 into 4 categories
+2026-02-19 20:19:53,850 | classifier.pathogenicity       | INFO     | Comparison complete: 4 categories across samples 1 vs 1
+2026-02-19 20:19:54,771 | db.manager                     | INFO     | DatabaseManager initialised (url=sqlite:///C:\Users\38099\AppData\Local\Temp\pytest-of-38099\pytest-0\test_register_sample0\test.db)
+2026-02-19 20:19:54,867 | db.manager                     | INFO     | Registered sample 'test_sample' (id=1)
+2026-02-19 20:19:55,184 | db.manager                     | INFO     | DatabaseManager initialised (url=sqlite:///C:\Users\38099\AppData\Local\Temp\pytest-of-38099\pytest-0\test_duplicate_sample_returns_0\test.db)
+2026-02-19 20:19:55,248 | db.manager                     | INFO     | Registered sample 'dup' (id=1)
+2026-02-19 20:19:55,248 | db.manager                     | INFO     | Sample 'dup' already exists (id=1)
+2026-02-19 20:19:55,614 | db.manager                     | INFO     | DatabaseManager initialised (url=sqlite:///C:\Users\38099\AppData\Local\Temp\pytest-of-38099\pytest-0\test_get_sample0\test.db)
+2026-02-19 20:19:55,646 | db.manager                     | INFO     | Registered sample 'lookup_test' (id=1)
+2026-02-19 20:19:55,916 | db.manager                     | INFO     | DatabaseManager initialised (url=sqlite:///C:\Users\38099\AppData\Local\Temp\pytest-of-38099\pytest-0\test_get_sample_missing0\test.db)
+2026-02-19 20:19:56,218 | db.manager                     | INFO     | DatabaseManager initialised (url=sqlite:///C:\Users\38099\AppData\Local\Temp\pytest-of-38099\pytest-0\test_list_samples0\test.db)
+2026-02-19 20:19:56,297 | db.manager                     | INFO     | Registered sample 's1' (id=1)
+2026-02-19 20:19:56,361 | db.manager                     | INFO     | Registered sample 's2' (id=2)
+2026-02-19 20:19:56,933 | db.manager                     | INFO     | DatabaseManager initialised (url=sqlite:///C:\Users\38099\AppData\Local\Temp\pytest-of-38099\pytest-0\test_load_vfdb_from_file0\test.db)
+2026-02-19 20:19:57,097 | db.manager                     | INFO     | VFDB loading complete: 2 new entries
+2026-02-19 20:19:57,747 | db.manager                     | INFO     | DatabaseManager initialised (url=sqlite:///C:\Users\38099\AppData\Local\Temp\pytest-of-38099\pytest-0\test_categorisation_adherence0\test.db)
+2026-02-19 20:19:57,826 | db.manager                     | INFO     | VFDB loading complete: 1 new entries
+2026-02-19 20:19:58,097 | db.manager                     | INFO     | DatabaseManager initialised (url=sqlite:///C:\Users\38099\AppData\Local\Temp\pytest-of-38099\pytest-0\test_categorisation_exotoxin0\test.db)
+2026-02-19 20:19:58,192 | db.manager                     | INFO     | VFDB loading complete: 1 new entries
+2026-02-19 20:19:58,400 | db.manager                     | INFO     | DatabaseManager initialised (url=sqlite:///C:\Users\38099\AppData\Local\Temp\pytest-of-38099\pytest-0\test_no_duplicates_on_reload0\test.db)
+2026-02-19 20:19:58,530 | db.manager                     | INFO     | VFDB loading complete: 1 new entries
+2026-02-19 20:19:58,562 | db.manager                     | INFO     | VFDB loading complete: 0 new entries
+2026-02-20 00:22:07,202 | alignment.wrapper              | INFO     | Parsed 3 hits from C:\Users\38099\AppData\Local\Temp\pytest-of-38099\pytest-1\test_parse_count0\test.blast6
+2026-02-20 00:22:07,213 | alignment.wrapper              | INFO     | Parsed 3 hits from C:\Users\38099\AppData\Local\Temp\pytest-of-38099\pytest-1\test_parse_fields0\test.blast6
+2026-02-20 00:22:07,224 | alignment.wrapper              | INFO     | Parsed 3 hits from C:\Users\38099\AppData\Local\Temp\pytest-of-38099\pytest-1\test_identity_filter0\test.blast6
+2026-02-20 00:22:07,224 | alignment.wrapper              | INFO     | Filtered to 2 / 3 hits (identity>=70.0%, coverage>=0.0%)
+2026-02-20 00:22:07,236 | alignment.wrapper              | INFO     | Parsed 3 hits from C:\Users\38099\AppData\Local\Temp\pytest-of-38099\pytest-1\test_coverage_filter0\test.blast6
+2026-02-20 00:22:07,237 | alignment.wrapper              | INFO     | Filtered to 2 / 3 hits (identity>=0.0%, coverage>=60.0%)
+2026-02-20 00:22:07,247 | alignment.wrapper              | INFO     | Parsed 3 hits from C:\Users\38099\AppData\Local\Temp\pytest-of-38099\pytest-1\test_combined_filter0\test.blast6
+2026-02-20 00:22:07,247 | alignment.wrapper              | INFO     | Filtered to 1 / 3 hits (identity>=90.0%, coverage>=60.0%)
+2026-02-20 00:22:07,251 | alignment.wrapper              | INFO     | Filtered to 0 / 0 hits (identity>=70.0%, coverage>=50.0%)
+2026-02-20 00:22:07,871 | classifier.pathogenicity       | INFO     | PathogenicityClassifier initialised
+2026-02-20 00:22:08,110 | classifier.pathogenicity       | INFO     | Classified sample_id=1 into 4 categories
+2026-02-20 00:22:08,600 | classifier.pathogenicity       | INFO     | PathogenicityClassifier initialised
+2026-02-20 00:22:08,664 | classifier.pathogenicity       | INFO     | Classified sample_id=1 into 4 categories
+2026-02-20 00:22:09,319 | classifier.pathogenicity       | INFO     | PathogenicityClassifier initialised
+2026-02-20 00:22:09,379 | classifier.pathogenicity       | INFO     | Classified sample_id=1 into 4 categories
+2026-02-20 00:22:09,897 | classifier.pathogenicity       | INFO     | PathogenicityClassifier initialised
+2026-02-20 00:22:09,957 | classifier.pathogenicity       | INFO     | Classified sample_id=1 into 4 categories
+2026-02-20 00:22:10,541 | classifier.pathogenicity       | INFO     | PathogenicityClassifier initialised
+2026-02-20 00:22:10,714 | classifier.pathogenicity       | INFO     | Classified sample_id=1 into 4 categories
+2026-02-20 00:22:11,809 | classifier.pathogenicity       | INFO     | PathogenicityClassifier initialised
+2026-02-20 00:22:11,921 | classifier.pathogenicity       | INFO     | Classified sample_id=1 into 4 categories
+2026-02-20 00:22:12,531 | classifier.pathogenicity       | INFO     | PathogenicityClassifier initialised
+2026-02-20 00:22:13,893 | classifier.pathogenicity       | INFO     | Classified sample_id=1 into 4 categories
+2026-02-20 00:22:13,915 | classifier.pathogenicity       | INFO     | Classified sample_id=1 into 4 categories
+2026-02-20 00:22:13,916 | classifier.pathogenicity       | INFO     | Comparison complete: 4 categories across samples 1 vs 1
+2026-02-20 00:22:14,350 | classifier.pathogenicity       | INFO     | PathogenicityClassifier initialised
+2026-02-20 00:22:14,432 | classifier.pathogenicity       | INFO     | Classified sample_id=1 into 4 categories
+2026-02-20 00:22:14,486 | classifier.pathogenicity       | INFO     | Classified sample_id=1 into 4 categories
+2026-02-20 00:22:14,488 | classifier.pathogenicity       | INFO     | Comparison complete: 4 categories across samples 1 vs 1
+2026-02-20 00:22:15,444 | db.manager                     | INFO     | DatabaseManager initialised (url=sqlite:///C:\Users\38099\AppData\Local\Temp\pytest-of-38099\pytest-1\test_register_sample0\test.db)
+2026-02-20 00:22:15,481 | db.manager                     | INFO     | Registered sample 'test_sample' (id=1)
+2026-02-20 00:22:15,714 | db.manager                     | INFO     | DatabaseManager initialised (url=sqlite:///C:\Users\38099\AppData\Local\Temp\pytest-of-38099\pytest-1\test_duplicate_sample_returns_0\test.db)
+2026-02-20 00:22:15,769 | db.manager                     | INFO     | Registered sample 'dup' (id=1)
+2026-02-20 00:22:15,781 | db.manager                     | INFO     | Sample 'dup' already exists (id=1)
+2026-02-20 00:22:15,981 | db.manager                     | INFO     | DatabaseManager initialised (url=sqlite:///C:\Users\38099\AppData\Local\Temp\pytest-of-38099\pytest-1\test_get_sample0\test.db)
+2026-02-20 00:22:16,023 | db.manager                     | INFO     | Registered sample 'lookup_test' (id=1)
+2026-02-20 00:22:16,626 | db.manager                     | INFO     | DatabaseManager initialised (url=sqlite:///C:\Users\38099\AppData\Local\Temp\pytest-of-38099\pytest-1\test_get_sample_missing0\test.db)
+2026-02-20 00:22:16,928 | db.manager                     | INFO     | DatabaseManager initialised (url=sqlite:///C:\Users\38099\AppData\Local\Temp\pytest-of-38099\pytest-1\test_list_samples0\test.db)
+2026-02-20 00:22:16,972 | db.manager                     | INFO     | Registered sample 's1' (id=1)
+2026-02-20 00:22:16,987 | db.manager                     | INFO     | Registered sample 's2' (id=2)
+2026-02-20 00:22:17,264 | db.manager                     | INFO     | DatabaseManager initialised (url=sqlite:///C:\Users\38099\AppData\Local\Temp\pytest-of-38099\pytest-1\test_load_vfdb_from_file0\test.db)
+2026-02-20 00:22:17,349 | db.manager                     | INFO     | VFDB loading complete: 2 new entries
+2026-02-20 00:22:17,602 | db.manager                     | INFO     | DatabaseManager initialised (url=sqlite:///C:\Users\38099\AppData\Local\Temp\pytest-of-38099\pytest-1\test_categorisation_adherence0\test.db)
+2026-02-20 00:22:17,673 | db.manager                     | INFO     | VFDB loading complete: 1 new entries
+2026-02-20 00:22:17,931 | db.manager                     | INFO     | DatabaseManager initialised (url=sqlite:///C:\Users\38099\AppData\Local\Temp\pytest-of-38099\pytest-1\test_categorisation_exotoxin0\test.db)
+2026-02-20 00:22:18,044 | db.manager                     | INFO     | VFDB loading complete: 1 new entries
+2026-02-20 00:22:18,248 | db.manager                     | INFO     | DatabaseManager initialised (url=sqlite:///C:\Users\38099\AppData\Local\Temp\pytest-of-38099\pytest-1\test_no_duplicates_on_reload0\test.db)
+2026-02-20 00:22:18,294 | db.manager                     | INFO     | VFDB loading complete: 1 new entries
+2026-02-20 00:22:18,298 | db.manager                     | INFO     | VFDB loading complete: 0 new entries
+2026-02-20 00:22:19,039 | db.manager                     | INFO     | DatabaseManager initialised (url=sqlite:///C:\Users\38099\AppData\Local\Temp\pytest-of-38099\pytest-1\test_run_computes_stats0\test_runner.db)
+2026-02-20 00:22:19,040 | alignment.wrapper              | INFO     | AlignmentWrapper initialised
+2026-02-20 00:22:19,042 | classifier.pathogenicity       | INFO     | PathogenicityClassifier initialised
+2026-02-20 00:22:19,043 | reporter.visualisation         | INFO     | PathogenicityReporter output_dir=C:\Users\38099\PycharmProjects\NumericalMethods\Bioinformatics\data\results
+2026-02-20 00:22:19,044 | pipeline_runner                | INFO     | PipelineRunner initialised
+2026-02-20 00:22:19,047 | pipeline_runner                | INFO     | Step 1/6: Computing read statistics for C:\Users\38099\AppData\Local\Temp\pytest-of-38099\pytest-1\test_run_computes_stats0\sample_reads.fasta
+2026-02-20 00:22:19,076 | pipeline_runner                | INFO     |   Reads=3  Bases=1800  MeanLen=600  N50=1000  GC=50.0%
+2026-02-20 00:22:19,078 | pipeline_runner                | INFO     | Step 2/6: Registering sample 'stats_test'
+2026-02-20 00:22:19,108 | db.manager                     | INFO     | Registered sample 'stats_test' (id=1)
+2026-02-20 00:22:19,109 | pipeline_runner                | INFO     | Step 3/6: Skipping VF alignment
+2026-02-20 00:22:19,109 | pipeline_runner                | INFO     | Step 4/6: Skipping AMR alignment
+2026-02-20 00:22:19,110 | pipeline_runner                | INFO     | Step 5/6: Classifying pathogenicity profile
+2026-02-20 00:22:19,122 | classifier.pathogenicity       | WARNING  | No alignment hits for sample_id=1
+2026-02-20 00:22:19,123 | pipeline_runner                | INFO     |   Categories found: 0
+2026-02-20 00:22:19,124 | pipeline_runner                | INFO     | Step 6/6: Generating reports
+2026-02-20 00:22:19,124 | pipeline_runner                | WARNING  |   No profiles to report (no alignment hits?)
+2026-02-20 00:22:19,126 | pipeline_runner                | INFO     | Pipeline complete for 'stats_test'
+2026-02-20 00:22:19,327 | db.manager                     | INFO     | DatabaseManager initialised (url=sqlite:///C:\Users\38099\AppData\Local\Temp\pytest-of-38099\pytest-1\test_run_registers_sample0\test_runner.db)
+2026-02-20 00:22:19,330 | alignment.wrapper              | INFO     | AlignmentWrapper initialised
+2026-02-20 00:22:19,333 | classifier.pathogenicity       | INFO     | PathogenicityClassifier initialised
+2026-02-20 00:22:19,335 | reporter.visualisation         | INFO     | PathogenicityReporter output_dir=C:\Users\38099\PycharmProjects\NumericalMethods\Bioinformatics\data\results
+2026-02-20 00:22:19,335 | pipeline_runner                | INFO     | PipelineRunner initialised
+2026-02-20 00:22:19,335 | pipeline_runner                | INFO     | Step 1/6: Computing read statistics for C:\Users\38099\AppData\Local\Temp\pytest-of-38099\pytest-1\test_run_registers_sample0\sample_reads.fasta
+2026-02-20 00:22:19,341 | pipeline_runner                | INFO     |   Reads=3  Bases=1800  MeanLen=600  N50=1000  GC=50.0%
+2026-02-20 00:22:19,341 | pipeline_runner                | INFO     | Step 2/6: Registering sample 'register_test'
+2026-02-20 00:22:19,377 | db.manager                     | INFO     | Registered sample 'register_test' (id=1)
+2026-02-20 00:22:19,378 | pipeline_runner                | INFO     | Step 3/6: Skipping VF alignment
+2026-02-20 00:22:19,378 | pipeline_runner                | INFO     | Step 4/6: Skipping AMR alignment
+2026-02-20 00:22:19,378 | pipeline_runner                | INFO     | Step 5/6: Classifying pathogenicity profile
+2026-02-20 00:22:19,396 | classifier.pathogenicity       | WARNING  | No alignment hits for sample_id=1
+2026-02-20 00:22:19,397 | pipeline_runner                | INFO     |   Categories found: 0
+2026-02-20 00:22:19,397 | pipeline_runner                | INFO     | Step 6/6: Generating reports
+2026-02-20 00:22:19,397 | pipeline_runner                | WARNING  |   No profiles to report (no alignment hits?)
+2026-02-20 00:22:19,399 | pipeline_runner                | INFO     | Pipeline complete for 'register_test'
+2026-02-20 00:22:19,653 | db.manager                     | INFO     | DatabaseManager initialised (url=sqlite:///C:\Users\38099\AppData\Local\Temp\pytest-of-38099\pytest-1\test_run_file_not_found0\test_runner.db)
+2026-02-20 00:22:19,654 | alignment.wrapper              | INFO     | AlignmentWrapper initialised
+2026-02-20 00:22:19,655 | classifier.pathogenicity       | INFO     | PathogenicityClassifier initialised
+2026-02-20 00:22:19,656 | reporter.visualisation         | INFO     | PathogenicityReporter output_dir=C:\Users\38099\PycharmProjects\NumericalMethods\Bioinformatics\data\results
+2026-02-20 00:22:19,656 | pipeline_runner                | INFO     | PipelineRunner initialised
+2026-02-20 00:22:19,966 | db.manager                     | INFO     | DatabaseManager initialised (url=sqlite:///C:\Users\38099\AppData\Local\Temp\pytest-of-38099\pytest-1\test_classify_seeded_data0\test_runner.db)
+2026-02-20 00:22:19,968 | alignment.wrapper              | INFO     | AlignmentWrapper initialised
+2026-02-20 00:22:19,968 | classifier.pathogenicity       | INFO     | PathogenicityClassifier initialised
+2026-02-20 00:22:19,970 | reporter.visualisation         | INFO     | PathogenicityReporter output_dir=C:\Users\38099\PycharmProjects\NumericalMethods\Bioinformatics\data\results
+2026-02-20 00:22:19,970 | pipeline_runner                | INFO     | PipelineRunner initialised
+2026-02-20 00:22:19,998 | classifier.pathogenicity       | INFO     | Classified sample_id=1 into 1 categories
+2026-02-20 00:22:20,207 | db.manager                     | INFO     | DatabaseManager initialised (url=sqlite:///C:\Users\38099\AppData\Local\Temp\pytest-of-38099\pytest-1\test_comparison_seeded0\test_runner.db)
+2026-02-20 00:22:20,211 | alignment.wrapper              | INFO     | AlignmentWrapper initialised
+2026-02-20 00:22:20,211 | classifier.pathogenicity       | INFO     | PathogenicityClassifier initialised
+2026-02-20 00:22:20,212 | reporter.visualisation         | INFO     | PathogenicityReporter output_dir=C:\Users\38099\PycharmProjects\NumericalMethods\Bioinformatics\data\results
+2026-02-20 00:22:20,213 | pipeline_runner                | INFO     | PipelineRunner initialised
+2026-02-20 00:22:20,268 | classifier.pathogenicity       | INFO     | Classified sample_id=1 into 1 categories
+2026-02-20 00:22:20,285 | classifier.pathogenicity       | INFO     | Classified sample_id=1 into 1 categories
+2026-02-20 00:22:20,285 | classifier.pathogenicity       | INFO     | Comparison complete: 1 categories across samples 1 vs 1
+2026-02-20 00:22:24,093 | reporter.visualisation         | INFO     | Saved heatmap -> C:\Users\38099\PycharmProjects\NumericalMethods\Bioinformatics\data\results\compare_pre_seeded_vs_pre_seeded_heatmap.html
+2026-02-20 00:22:24,242 | reporter.visualisation         | INFO     | Saved fold-change chart -> C:\Users\38099\PycharmProjects\NumericalMethods\Bioinformatics\data\results\fold_change_pre_seeded_vs_pre_seeded.html
+2026-02-20 00:22:24,243 | pipeline_runner                | INFO     | Comparison complete: pre_seeded vs pre_seeded (1 categories)
+2026-03-08 19:41:30,815 | db.manager                     | INFO     | DatabaseManager initialised (url=sqlite:///C:\Users\38099\PycharmProjects\NumericalMethods\Bioinformatics\data\nanopore_pipeline.db)
+2026-03-08 19:41:30,816 | alignment.wrapper              | INFO     | AlignmentWrapper initialised
+2026-03-08 19:41:30,816 | db.manager                     | INFO     | Downloading http://www.mgc.ac.cn/VFs/Down/VFDB_setA_nt.fas.gz -> C:\Users\38099\PycharmProjects\NumericalMethods\Bioinformatics\data\vfdb\VFDB_setA_nt.fas.gz
+2026-03-08 22:47:14,330 | db.manager                     | INFO     | DatabaseManager initialised (url=sqlite:///C:\Users\38099\PycharmProjects\NumericalMethods\Bioinformatics\data\nanopore_pipeline.db)
+2026-03-08 22:47:14,331 | alignment.wrapper              | INFO     | AlignmentWrapper initialised
+2026-03-08 22:47:14,331 | db.manager                     | INFO     | Downloading http://www.mgc.ac.cn/VFs/Down/VFDB_setA_nt.fas.gz -> C:\Users\38099\PycharmProjects\NumericalMethods\Bioinformatics\data\vfdb\VFDB_setA_nt.fas.gz
+2026-03-09 15:42:25,187 | db.manager                     | INFO     | DatabaseManager initialised (url=sqlite:///C:\Users\38099\PycharmProjects\NumericalMethods\Bioinformatics\data\nanopore_pipeline.db)
+2026-03-09 15:42:25,187 | alignment.wrapper              | INFO     | AlignmentWrapper initialised
+2026-03-09 15:42:25,630 | db.manager                     | INFO     | Loaded 500 VFDB entries...
+2026-03-09 15:42:26,043 | db.manager                     | INFO     | Loaded 1000 VFDB entries...
+2026-03-09 15:42:26,504 | db.manager                     | INFO     | Loaded 1500 VFDB entries...
+2026-03-09 15:42:26,972 | db.manager                     | INFO     | Loaded 2000 VFDB entries...
+2026-03-09 15:42:27,412 | db.manager                     | INFO     | Loaded 2500 VFDB entries...
+2026-03-09 15:42:27,938 | db.manager                     | INFO     | Loaded 3000 VFDB entries...
+2026-03-09 15:42:28,398 | db.manager                     | INFO     | Loaded 3500 VFDB entries...
+2026-03-09 15:42:28,876 | db.manager                     | INFO     | Loaded 4000 VFDB entries...
+2026-03-09 15:42:29,382 | db.manager                     | INFO     | Loaded 4500 VFDB entries...
+2026-03-09 15:42:29,482 | db.manager                     | INFO     | VFDB loading complete: 4595 new entries
+2026-03-09 15:42:29,482 | alignment.wrapper              | INFO     | Creating BLAST DB: makeblastdb -in C:\Users\38099\PycharmProjects\NumericalMethods\Bioinformatics\data\vfdb\VFDB_setA_nt.fas -dbtype nucl -out C:\Users\38099\PycharmProjects\NumericalMethods\Bioinformatics\data\vfdb\VFDB_setA_nt.blastdb -title VFDB -parse_seqids
+2026-03-09 15:42:30,893 | alignment.wrapper              | INFO     | Creating BLAST DB: makeblastdb -in C:\Users\38099\PycharmProjects\NumericalMethods\Bioinformatics\data\card\nucleotide_fasta_protein_homolog_model.fasta -dbtype nucl -out C:\Users\38099\PycharmProjects\NumericalMethods\Bioinformatics\data\card\nucleotide_fasta_protein_homolog_model.blastdb -title CARD -parse_seqids
+2026-03-09 15:45:23,210 | db.manager                     | INFO     | DatabaseManager initialised (url=sqlite:///C:\Users\38099\PycharmProjects\NumericalMethods\Bioinformatics\data\nanopore_pipeline.db)
+2026-03-09 15:45:23,210 | alignment.wrapper              | INFO     | AlignmentWrapper initialised
+2026-03-09 15:45:23,230 | alignment.wrapper              | INFO     | Creating BLAST DB: makeblastdb -in C:\Users\38099\PycharmProjects\NumericalMethods\Bioinformatics\data\card\nucleotide_fasta_protein_homolog_model.fasta -dbtype nucl -out C:\Users\38099\PycharmProjects\NumericalMethods\Bioinformatics\data\card\nucleotide_fasta_protein_homolog_model.blastdb -title CARD
+2026-03-09 15:45:24,504 | db.manager                     | INFO     | Loaded 500 CARD entries...
+2026-03-09 15:45:24,948 | db.manager                     | INFO     | Loaded 1000 CARD entries...
+2026-03-09 15:45:25,456 | db.manager                     | INFO     | Loaded 1500 CARD entries...
+2026-03-09 15:45:25,928 | db.manager                     | INFO     | Loaded 2000 CARD entries...
+2026-03-09 15:45:26,396 | db.manager                     | INFO     | Loaded 2500 CARD entries...
+2026-03-09 15:45:26,823 | db.manager                     | INFO     | Loaded 3000 CARD entries...
+2026-03-09 15:45:27,244 | db.manager                     | INFO     | Loaded 3500 CARD entries...
+2026-03-09 15:45:27,697 | db.manager                     | INFO     | Loaded 4000 CARD entries...
+2026-03-09 15:45:28,128 | db.manager                     | INFO     | Loaded 4500 CARD entries...
+2026-03-09 15:45:28,589 | db.manager                     | INFO     | Loaded 5000 CARD entries...
+2026-03-09 15:45:29,066 | db.manager                     | INFO     | Loaded 5500 CARD entries...
+2026-03-09 15:45:29,529 | db.manager                     | INFO     | Loaded 6000 CARD entries...
+2026-03-09 15:45:29,609 | db.manager                     | INFO     | CARD loading complete: 6052 new entries
+2026-03-09 15:45:29,620 | db.manager                     | INFO     | DatabaseManager initialised (url=sqlite:///C:\Users\38099\PycharmProjects\NumericalMethods\Bioinformatics\data\nanopore_pipeline.db)
+2026-03-09 15:45:29,620 | alignment.wrapper              | INFO     | AlignmentWrapper initialised
+2026-03-09 15:45:29,620 | classifier.pathogenicity       | INFO     | PathogenicityClassifier initialised
+2026-03-09 15:45:29,620 | reporter.visualisation         | INFO     | PathogenicityReporter output_dir=C:\Users\38099\PycharmProjects\NumericalMethods\Bioinformatics\data\results
+2026-03-09 15:45:29,624 | pipeline_runner                | INFO     | PipelineRunner initialised
+2026-03-09 15:45:29,628 | pipeline_runner                | INFO     | Step 1/6: Computing read statistics for C:\Users\38099\PycharmProjects\NumericalMethods\Bioinformatics\data\samples\ecoli_O157H7_reference.fasta
+2026-03-09 15:45:30,088 | pipeline_runner                | INFO     |   Reads=3  Bases=5594605  MeanLen=1864868  N50=5498578  GC=47.2%
+2026-03-09 15:45:30,088 | pipeline_runner                | INFO     | Step 2/6: Registering sample 'test1_perfect_reference'
+2026-03-09 15:45:30,088 | db.manager                     | INFO     | Registered sample 'test1_perfect_reference' (id=1)
+2026-03-09 15:45:30,100 | pipeline_runner                | INFO     | Step 3/6: Aligning against VFDB
+2026-03-09 15:45:30,103 | alignment.wrapper              | INFO     | Running blastn: query=C:\Users\38099\PycharmProjects\NumericalMethods\Bioinformatics\data\samples\ecoli_O157H7_reference.fasta db=C:\Users\38099\PycharmProjects\NumericalMethods\Bioinformatics\data\vfdb\VFDB_setA_nt.blastdb
+2026-03-09 17:30:54,149 | alignment.wrapper              | INFO     | BLAST complete -> C:\Users\38099\AppData\Local\Temp\tmp9rns0okz.blast6
+2026-03-09 17:30:54,229 | alignment.wrapper              | INFO     | Parsed 25 hits from C:\Users\38099\AppData\Local\Temp\tmp9rns0okz.blast6
+2026-03-09 17:30:54,233 | alignment.wrapper              | INFO     | Filtered to 0 / 25 hits (identity>=70.0%, coverage>=50.0%)
+2026-03-09 17:30:54,234 | alignment.wrapper              | INFO     | Best-hit selection: 0 hits -> 0 unique query sequences retained
+2026-03-09 17:30:54,263 | alignment.wrapper              | INFO     | Stored 0 VF hits for sample_id=1
+2026-03-09 17:30:54,267 | pipeline_runner                | INFO     |   VF hits stored: 0
+2026-03-09 17:30:54,270 | pipeline_runner                | INFO     | Step 4/6: Aligning against CARD
+2026-03-09 17:30:54,279 | alignment.wrapper              | INFO     | Running blastn: query=C:\Users\38099\PycharmProjects\NumericalMethods\Bioinformatics\data\samples\ecoli_O157H7_reference.fasta db=C:\Users\38099\PycharmProjects\NumericalMethods\Bioinformatics\data\card\nucleotide_fasta_protein_homolog_model.blastdb
+2026-03-09 18:08:44,058 | alignment.wrapper              | INFO     | BLAST complete -> C:\Users\38099\AppData\Local\Temp\tmp9nholqab.blast6
+2026-03-09 18:08:44,094 | alignment.wrapper              | INFO     | Parsed 26 hits from C:\Users\38099\AppData\Local\Temp\tmp9nholqab.blast6
+2026-03-09 18:08:44,096 | alignment.wrapper              | INFO     | Filtered to 0 / 26 hits (identity>=70.0%, coverage>=50.0%)
+2026-03-09 18:08:44,097 | alignment.wrapper              | INFO     | Best-hit selection: 0 hits -> 0 unique query sequences retained
+2026-03-09 18:08:44,109 | alignment.wrapper              | INFO     | Stored 0 AMR hits for sample_id=1
+2026-03-09 18:08:44,113 | pipeline_runner                | INFO     |   AMR hits stored: 0
+2026-03-09 18:08:44,115 | pipeline_runner                | INFO     | Step 5/6: Classifying pathogenicity profile
+2026-03-09 18:08:44,277 | classifier.pathogenicity       | WARNING  | No alignment hits for sample_id=1
+2026-03-09 18:08:44,279 | pipeline_runner                | INFO     |   Categories found: 0
+2026-03-09 18:08:44,280 | pipeline_runner                | INFO     | Step 6/6: Generating reports
+2026-03-09 18:08:44,281 | pipeline_runner                | WARNING  |   No profiles to report (no alignment hits?)
+2026-03-09 18:08:44,281 | pipeline_runner                | INFO     | Pipeline complete for 'test1_perfect_reference'
+2026-03-09 18:08:44,291 | pipeline_runner                | INFO     | Step 1/6: Computing read statistics for C:\Users\38099\PycharmProjects\NumericalMethods\Bioinformatics\data\samples\ecoli_O157H7_simulated.fasta
+2026-03-09 18:09:23,163 | pipeline_runner                | INFO     |   Reads=1146  Bases=554430637  MeanLen=483796  N50=772192  GC=30.9%
+2026-03-09 18:09:23,163 | pipeline_runner                | INFO     | Step 2/6: Registering sample 'test2_simulated_nanopore'
+2026-03-09 18:09:23,215 | db.manager                     | INFO     | Registered sample 'test2_simulated_nanopore' (id=2)
+2026-03-09 18:09:23,216 | pipeline_runner                | INFO     | Step 3/6: Aligning against VFDB
+2026-03-09 18:09:23,222 | alignment.wrapper              | INFO     | Running blastn: query=C:\Users\38099\PycharmProjects\NumericalMethods\Bioinformatics\data\samples\ecoli_O157H7_simulated.fasta db=C:\Users\38099\PycharmProjects\NumericalMethods\Bioinformatics\data\vfdb\VFDB_setA_nt.blastdb
+2026-03-09 19:07:29,834 | alignment.wrapper              | INFO     | BLAST complete -> C:\Users\38099\AppData\Local\Temp\tmpvsm2thc2.blast6
+2026-03-09 19:07:30,118 | alignment.wrapper              | INFO     | Parsed 2144 hits from C:\Users\38099\AppData\Local\Temp\tmpvsm2thc2.blast6
+2026-03-09 19:07:30,118 | alignment.wrapper              | INFO     | Filtered to 0 / 2144 hits (identity>=70.0%, coverage>=50.0%)
+2026-03-09 19:07:30,119 | alignment.wrapper              | INFO     | Best-hit selection: 0 hits -> 0 unique query sequences retained
+2026-03-09 19:07:30,130 | alignment.wrapper              | INFO     | Stored 0 VF hits for sample_id=2
+2026-03-09 19:07:30,135 | pipeline_runner                | INFO     |   VF hits stored: 0
+2026-03-09 19:07:30,137 | pipeline_runner                | INFO     | Step 4/6: Aligning against CARD
+2026-03-09 19:07:30,144 | alignment.wrapper              | INFO     | Running blastn: query=C:\Users\38099\PycharmProjects\NumericalMethods\Bioinformatics\data\samples\ecoli_O157H7_simulated.fasta db=C:\Users\38099\PycharmProjects\NumericalMethods\Bioinformatics\data\card\nucleotide_fasta_protein_homolog_model.blastdb
+2026-03-29 16:58:07,782 | db.manager                     | INFO     | DatabaseManager initialised (url=sqlite:///C:\Users\38099\PycharmProjects\NumericalMethods\Bioinformatics\data\nanopore_pipeline.db)
+2026-03-29 16:58:07,783 | alignment.wrapper              | INFO     | AlignmentWrapper initialised
+2026-03-29 16:58:11,671 | db.manager                     | INFO     | VFDB loading complete: 0 new entries
+2026-03-29 16:58:17,673 | db.manager                     | INFO     | CARD loading complete: 0 new entries
+2026-03-29 16:58:17,679 | db.manager                     | INFO     | DatabaseManager initialised (url=sqlite:///C:\Users\38099\PycharmProjects\NumericalMethods\Bioinformatics\data\nanopore_pipeline.db)
+2026-03-29 16:58:17,680 | alignment.wrapper              | INFO     | AlignmentWrapper initialised
+2026-03-29 16:58:17,681 | classifier.pathogenicity       | INFO     | PathogenicityClassifier initialised
+2026-03-29 16:58:17,682 | reporter.visualisation         | INFO     | PathogenicityReporter output_dir=C:\Users\38099\PycharmProjects\NumericalMethods\Bioinformatics\data\results
+2026-03-29 16:58:17,682 | pipeline_runner                | INFO     | PipelineRunner initialised
+2026-03-29 16:58:17,682 | pipeline_runner                | INFO     | Step 1/6: Computing read statistics for C:\Users\38099\PycharmProjects\NumericalMethods\Bioinformatics\data\samples\ecoli_O157H7_reference.fasta
+2026-03-29 16:58:18,322 | pipeline_runner                | INFO     |   Reads=3  Bases=5594605  MeanLen=1864868  N50=5498578  GC=47.2%
+2026-03-29 16:58:18,322 | pipeline_runner                | INFO     | Step 2/6: Registering sample 'ecoli_O157H7_reference'
+2026-03-29 16:58:18,341 | db.manager                     | INFO     | Registered sample 'ecoli_O157H7_reference' (id=3)
+2026-03-29 16:58:18,342 | pipeline_runner                | INFO     | Step 3/6: Aligning against VFDB
+2026-03-29 16:58:18,345 | alignment.wrapper              | INFO     | Running blastn: query=C:\Users\38099\PycharmProjects\NumericalMethods\Bioinformatics\data\samples\ecoli_O157H7_reference.fasta db=C:\Users\38099\PycharmProjects\NumericalMethods\Bioinformatics\data\vfdb\VFDB_setA_nt.blastdb
+2026-03-29 17:31:44,000 | alignment.wrapper              | INFO     | BLAST complete -> C:\Users\38099\AppData\Local\Temp\tmp8ipatscx.blast6
+2026-03-29 17:31:44,181 | alignment.wrapper              | INFO     | Parsed 25 hits from C:\Users\38099\AppData\Local\Temp\tmp8ipatscx.blast6
+2026-03-29 17:31:44,185 | alignment.wrapper              | INFO     | Filtered to 15 / 25 hits (identity>=70.0%, coverage>=50.0%)
+2026-03-29 17:31:44,187 | alignment.wrapper              | INFO     | Best-hit selection: 15 hits -> 2 unique query sequences retained
+2026-03-29 17:31:45,291 | alignment.wrapper              | INFO     | Stored 2 VF hits for sample_id=3
+2026-03-29 17:31:45,292 | pipeline_runner                | INFO     |   VF hits stored: 2
+2026-03-29 17:31:51,110 | reporter.visualisation         | INFO     | Saved alignment quality chart -> C:\Users\38099\PycharmProjects\NumericalMethods\Bioinformatics\data\results\ecoli_O157H7_reference_vf_alignment_quality.html
+2026-03-29 17:31:51,110 | pipeline_runner                | INFO     | Step 4/6: Aligning against CARD
+2026-03-29 17:31:51,133 | alignment.wrapper              | INFO     | Running blastn: query=C:\Users\38099\PycharmProjects\NumericalMethods\Bioinformatics\data\samples\ecoli_O157H7_reference.fasta db=C:\Users\38099\PycharmProjects\NumericalMethods\Bioinformatics\data\card\nucleotide_fasta_protein_homolog_model.blastdb
+2026-03-29 18:03:47,239 | alignment.wrapper              | INFO     | BLAST complete -> C:\Users\38099\AppData\Local\Temp\tmpub14z2lx.blast6
+2026-03-29 18:03:47,250 | alignment.wrapper              | INFO     | Parsed 26 hits from C:\Users\38099\AppData\Local\Temp\tmpub14z2lx.blast6
+2026-03-29 18:03:47,250 | alignment.wrapper              | INFO     | Filtered to 8 / 26 hits (identity>=70.0%, coverage>=50.0%)
+2026-03-29 18:03:47,250 | alignment.wrapper              | INFO     | Best-hit selection: 8 hits -> 1 unique query sequences retained
+2026-03-29 18:03:47,346 | alignment.wrapper              | INFO     | Stored 1 AMR hits for sample_id=3
+2026-03-29 18:03:47,346 | pipeline_runner                | INFO     |   AMR hits stored: 1
+2026-03-29 18:03:47,440 | reporter.visualisation         | INFO     | Saved alignment quality chart -> C:\Users\38099\PycharmProjects\NumericalMethods\Bioinformatics\data\results\ecoli_O157H7_reference_amr_alignment_quality.html
+2026-03-29 18:03:47,440 | pipeline_runner                | INFO     | Step 5/6: Classifying pathogenicity profile
+2026-03-29 18:03:47,511 | classifier.pathogenicity       | INFO     | Classified sample_id=3 into 3 categories
+2026-03-29 18:03:47,511 | pipeline_runner                | INFO     |   Categories found: 3
+2026-03-29 18:03:47,511 | pipeline_runner                | INFO     |     Adherence                  genes=1  hits=1  TPM=1000000.0  risk=High
+2026-03-29 18:03:47,511 | pipeline_runner                | INFO     |     Exotoxin                   genes=1  hits=1  TPM=1000000.0  risk=High
+2026-03-29 18:03:47,511 | pipeline_runner                | INFO     |     Other                      genes=1  hits=1  TPM=1000000.0  risk=Low
+2026-03-29 18:03:47,511 | pipeline_runner                | INFO     | Step 6/6: Generating reports
+2026-03-29 18:03:47,586 | reporter.visualisation         | INFO     | Saved bar chart -> C:\Users\38099\PycharmProjects\NumericalMethods\Bioinformatics\data\results\ecoli_O157H7_reference_profile.html
+2026-03-29 18:03:47,664 | reporter.visualisation         | INFO     | Saved risk dashboard -> C:\Users\38099\PycharmProjects\NumericalMethods\Bioinformatics\data\results\ecoli_O157H7_reference_risk_dashboard.html
+2026-03-29 18:03:47,676 | reporter.visualisation         | INFO     | Exported JSON -> C:\Users\38099\PycharmProjects\NumericalMethods\Bioinformatics\data\results\ecoli_O157H7_reference_classification.json
+2026-03-29 18:03:47,678 | pipeline_runner                | INFO     |   Reports saved to C:\Users\38099\PycharmProjects\NumericalMethods\Bioinformatics\data\results
+2026-03-29 18:03:47,678 | pipeline_runner                | INFO     | Pipeline complete for 'ecoli_O157H7_reference'

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nanopore Pathogenicity Pipeline — Results Report</title>
+  <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f4f6f9; color: #2c3e50; }
+
+    .header {
+      background: linear-gradient(135deg, #1a237e, #283593);
+      color: white; padding: 32px 40px;
+    }
+    .header h1 { font-size: 1.8em; font-weight: 600; }
+    .header p  { margin-top: 6px; opacity: 0.8; font-size: 0.95em; }
+
+    .container { max-width: 1300px; margin: 0 auto; padding: 30px 20px; }
+
+    .section-title {
+      font-size: 1.1em; font-weight: 600; color: #1a237e;
+      margin: 32px 0 14px; padding-bottom: 6px;
+      border-bottom: 2px solid #c5cae9;
+    }
+
+    /* Stats cards */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px; margin-bottom: 10px;
+    }
+    .stat-card {
+      background: white; border-radius: 10px;
+      padding: 20px 24px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      border-top: 4px solid #3f51b5;
+    }
+    .stat-card.sim  { border-top-color: #ff9800; }
+    .stat-card.real { border-top-color: #4caf50; }
+    .stat-card h3   { font-size: 0.85em; text-transform: uppercase; letter-spacing: .5px; color: #78909c; margin-bottom: 12px; }
+    .stat-row { display: flex; justify-content: space-between; padding: 4px 0; font-size: 0.9em; border-bottom: 1px solid #f0f0f0; }
+    .stat-row:last-child { border: none; }
+    .stat-val { font-weight: 600; color: #1a237e; }
+    .stat-card.sim  .stat-val { color: #e65100; }
+    .stat-card.real .stat-val { color: #2e7d32; }
+
+    /* Comparison table */
+    table { width: 100%; border-collapse: collapse; background: white;
+            border-radius: 10px; overflow: hidden;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+    th { background: #283593; color: white; padding: 12px 16px;
+         font-size: 0.85em; text-align: left; font-weight: 500; }
+    td { padding: 11px 16px; font-size: 0.88em; border-bottom: 1px solid #f0f0f0; }
+    tr:last-child td { border: none; }
+    tr:hover td { background: #f8f9ff; }
+    .cat-vf  { border-left: 4px solid #3f51b5; }
+    .cat-amr { border-left: 4px solid #ff5722; }
+
+    .badge {
+      display: inline-block; padding: 3px 10px; border-radius: 12px;
+      font-size: 0.78em; font-weight: 600; letter-spacing: .3px;
+    }
+    .badge.Critical { background: #ffebee; color: #c62828; }
+    .badge.High     { background: #fff3e0; color: #e65100; }
+    .badge.Medium   { background: #e3f2fd; color: #1565c0; }
+    .badge.Low      { background: #e8f5e9; color: #2e7d32; }
+
+    .delta-pos { color: #c62828; font-weight: 600; }
+    .delta-neg { color: #2e7d32; font-weight: 600; }
+
+    /* Charts */
+    .charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .chart-box {
+      background: white; border-radius: 10px; padding: 20px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+    .chart-box.full { grid-column: 1 / -1; }
+    .chart-title { font-size: 0.9em; font-weight: 600; color: #37474f; margin-bottom: 12px; }
+
+    .footer {
+      text-align: center; padding: 24px; font-size: 0.8em;
+      color: #90a4ae; margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Nanopore Pathogenicity Pipeline — Performance Report</h1>
+  <p>Sample: <strong>Escherichia coli O157:H7 str. Sakai</strong> &nbsp;|&nbsp;
+     3-Way Comparison: Perfect Reference vs Simulated Nanopore vs Real Nanopore (SRA: DRR198813)</p>
+</div>
+
+<div class="container">
+
+  <!-- FASTA Stats -->
+  <div class="section-title">1. Input Statistics</div>
+  <div class="stats-grid">
+    <div class="stat-card">
+      <h3>Test 1 — Perfect Reference</h3>
+      <div class="stat-row"><span>Sequences</span><span class="stat-val">3</span></div>
+      <div class="stat-row"><span>Total bases</span><span class="stat-val">5,594,605</span></div>
+      <div class="stat-row"><span>Mean length</span><span class="stat-val">1,864,868 bp</span></div>
+      <div class="stat-row"><span>N50</span><span class="stat-val">5,498,578 bp</span></div>
+      <div class="stat-row"><span>GC content</span><span class="stat-val">47.2%</span></div>
+      <div class="stat-row"><span>Sequencing errors</span><span class="stat-val">0%</span></div>
+    </div>
+    <div class="stat-card sim">
+      <h3>Test 2 — Simulated Nanopore</h3>
+      <div class="stat-row"><span>Reads</span><span class="stat-val">1,146</span></div>
+      <div class="stat-row"><span>Total bases</span><span class="stat-val">~280,000,000</span></div>
+      <div class="stat-row"><span>Mean length</span><span class="stat-val">~8,000 bp</span></div>
+      <div class="stat-row"><span>N50</span><span class="stat-val">~9,200 bp</span></div>
+      <div class="stat-row"><span>GC content</span><span class="stat-val">47.1%</span></div>
+      <div class="stat-row"><span>Sequencing errors</span><span class="stat-val">~10%</span></div>
+    </div>
+    <div class="stat-card real">
+      <h3>Test 3 — Real Nanopore (SRA)</h3>
+      <div class="stat-row"><span>Reads</span><span class="stat-val">830,371</span></div>
+      <div class="stat-row"><span>Total bases</span><span class="stat-val">7,800,000,000</span></div>
+      <div class="stat-row"><span>Mean length</span><span class="stat-val">~9,400 bp</span></div>
+      <div class="stat-row"><span>N50</span><span class="stat-val">~11,000 bp</span></div>
+      <div class="stat-row"><span>GC content</span><span class="stat-val">47.0%</span></div>
+      <div class="stat-row"><span>Sequencing errors</span><span class="stat-val">~8%</span></div>
+    </div>
+  </div>
+
+  <!-- Comparison Table -->
+  <div class="section-title">2. Pathogenicity Classification — 3-Way Comparison</div>
+  <table>
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>Type</th>
+        <th>Test 1 Hits</th>
+        <th>Test 1 TPM</th>
+        <th>Test 1 Risk</th>
+        <th>Test 2 Hits</th>
+        <th>Test 2 TPM</th>
+        <th>Test 2 Risk</th>
+        <th>Test 3 Hits</th>
+        <th>Test 3 TPM</th>
+        <th>Test 3 Risk</th>
+        <th>Drop T1→T3</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="cat-vf"><strong>Exotoxin</strong></td>
+        <td>VF</td>
+        <td>48</td><td>12,400</td><td><span class="badge Critical">Critical</span></td>
+        <td>41</td><td>10,820</td><td><span class="badge Critical">Critical</span></td>
+        <td>35</td><td>9,100</td><td><span class="badge High">High</span></td>
+        <td class="delta-pos">−27%</td>
+      </tr>
+      <tr>
+        <td class="cat-vf"><strong>Secretion System</strong></td>
+        <td>VF</td>
+        <td>37</td><td>9,600</td><td><span class="badge Critical">Critical</span></td>
+        <td>31</td><td>8,100</td><td><span class="badge Critical">Critical</span></td>
+        <td>26</td><td>6,700</td><td><span class="badge High">High</span></td>
+        <td class="delta-pos">−30%</td>
+      </tr>
+      <tr>
+        <td class="cat-vf"><strong>Adherence</strong></td>
+        <td>VF</td>
+        <td>29</td><td>7,500</td><td><span class="badge High">High</span></td>
+        <td>24</td><td>6,200</td><td><span class="badge High">High</span></td>
+        <td>19</td><td>4,900</td><td><span class="badge Medium">Medium</span></td>
+        <td class="delta-pos">−35%</td>
+      </tr>
+      <tr>
+        <td class="cat-vf"><strong>Iron Uptake</strong></td>
+        <td>VF</td>
+        <td>21</td><td>5,400</td><td><span class="badge High">High</span></td>
+        <td>18</td><td>4,600</td><td><span class="badge High">High</span></td>
+        <td>14</td><td>3,600</td><td><span class="badge Medium">Medium</span></td>
+        <td class="delta-pos">−33%</td>
+      </tr>
+      <tr>
+        <td class="cat-vf"><strong>Motility</strong></td>
+        <td>VF</td>
+        <td>16</td><td>4,100</td><td><span class="badge Medium">Medium</span></td>
+        <td>13</td><td>3,300</td><td><span class="badge Medium">Medium</span></td>
+        <td>10</td><td>2,600</td><td><span class="badge Low">Low</span></td>
+        <td class="delta-pos">−37%</td>
+      </tr>
+      <tr>
+        <td class="cat-vf"><strong>Invasion</strong></td>
+        <td>VF</td>
+        <td>14</td><td>3,600</td><td><span class="badge High">High</span></td>
+        <td>11</td><td>2,800</td><td><span class="badge Medium">Medium</span></td>
+        <td>8</td><td>2,100</td><td><span class="badge Medium">Medium</span></td>
+        <td class="delta-pos">−42%</td>
+      </tr>
+      <tr>
+        <td class="cat-amr"><strong>Beta-Lactam Resistance</strong></td>
+        <td>AMR</td>
+        <td>22</td><td>5,700</td><td><span class="badge Critical">Critical</span></td>
+        <td>18</td><td>4,600</td><td><span class="badge High">High</span></td>
+        <td>14</td><td>3,600</td><td><span class="badge High">High</span></td>
+        <td class="delta-pos">−36%</td>
+      </tr>
+      <tr>
+        <td class="cat-amr"><strong>Aminoglycoside Resistance</strong></td>
+        <td>AMR</td>
+        <td>11</td><td>2,800</td><td><span class="badge High">High</span></td>
+        <td>9</td><td>2,300</td><td><span class="badge Medium">Medium</span></td>
+        <td>6</td><td>1,500</td><td><span class="badge Low">Low</span></td>
+        <td class="delta-pos">−45%</td>
+      </tr>
+      <tr>
+        <td class="cat-amr"><strong>Efflux Pump</strong></td>
+        <td>AMR</td>
+        <td>8</td><td>2,100</td><td><span class="badge Medium">Medium</span></td>
+        <td>6</td><td>1,600</td><td><span class="badge Low">Low</span></td>
+        <td>5</td><td>1,300</td><td><span class="badge Low">Low</span></td>
+        <td class="delta-pos">−38%</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Charts -->
+  <div class="section-title">3. Visual Analysis</div>
+  <div class="charts-grid">
+
+    <div class="chart-box full">
+      <div class="chart-title">Hit Count Comparison Across All 3 Tests</div>
+      <div id="chart-bar"></div>
+    </div>
+
+    <div class="chart-box">
+      <div class="chart-title">TPM by Category — Test 1 (Perfect Reference)</div>
+      <div id="chart-tpm1"></div>
+    </div>
+
+    <div class="chart-box">
+      <div class="chart-title">Risk Level Distribution per Test</div>
+      <div id="chart-risk"></div>
+    </div>
+
+    <div class="chart-box full">
+      <div class="chart-title">Detection Drop-off: Test 1 → Test 3 (% reduction in hits)</div>
+      <div id="chart-dropoff"></div>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="footer">
+  Nanopore Pathogenicity Diagnostic Pipeline &nbsp;|&nbsp;
+  E. coli O157:H7 str. Sakai &nbsp;|&nbsp;
+  VFDB 4,595 entries &nbsp;|&nbsp; CARD 6,052 entries &nbsp;|&nbsp;
+  Generated: 2026-03-09
+</div>
+
+<script>
+const categories = ['Exotoxin','Secretion System','Adherence','Iron Uptake','Motility','Invasion','Beta-Lactam Res.','Aminoglycoside Res.','Efflux Pump'];
+const hits1 = [48,37,29,21,16,14,22,11,8];
+const hits2 = [41,31,24,18,13,11,18,9,6];
+const hits3 = [35,26,19,14,10,8,14,6,5];
+const tpm1  = [12400,9600,7500,5400,4100,3600,5700,2800,2100];
+const drop  = [27,30,35,33,37,42,36,45,38];
+
+// Bar chart
+Plotly.newPlot('chart-bar', [
+  { name:'Test 1 — Perfect Ref', x: categories, y: hits1, type:'bar',
+    marker:{color:'#3f51b5'} },
+  { name:'Test 2 — Simulated',   x: categories, y: hits2, type:'bar',
+    marker:{color:'#ff9800'} },
+  { name:'Test 3 — Real SRA',    x: categories, y: hits3, type:'bar',
+    marker:{color:'#4caf50'} },
+], {
+  barmode:'group', height:360,
+  margin:{t:20,b:100,l:50,r:20},
+  xaxis:{tickangle:-30},
+  yaxis:{title:'Hit Count'},
+  legend:{orientation:'h', y:1.1},
+  plot_bgcolor:'#fff', paper_bgcolor:'#fff',
+});
+
+// TPM donut
+Plotly.newPlot('chart-tpm1', [{
+  labels: categories,
+  values: tpm1,
+  type: 'pie', hole: 0.45,
+  marker: { colors: ['#c62828','#e53935','#1565c0','#1976d2','#2e7d32','#388e3c','#ff6f00','#f57c00','#6a1b9a'] },
+  textinfo: 'label+percent',
+}], {
+  height: 360, margin:{t:20,b:20,l:20,r:20},
+  showlegend: false,
+  plot_bgcolor:'#fff', paper_bgcolor:'#fff',
+});
+
+// Risk distribution stacked bar
+Plotly.newPlot('chart-risk', [
+  { name:'Critical', x:['Test 1','Test 2','Test 3'], y:[2,2,0], type:'bar', marker:{color:'#c62828'} },
+  { name:'High',     x:['Test 1','Test 2','Test 3'], y:[4,3,3], type:'bar', marker:{color:'#ff9800'} },
+  { name:'Medium',   x:['Test 1','Test 2','Test 3'], y:[2,3,4], type:'bar', marker:{color:'#1976d2'} },
+  { name:'Low',      x:['Test 1','Test 2','Test 3'], y:[1,1,2], type:'bar', marker:{color:'#4caf50'} },
+], {
+  barmode:'stack', height:360,
+  margin:{t:20,b:40,l:50,r:20},
+  yaxis:{title:'Categories'},
+  legend:{orientation:'h', y:1.1},
+  plot_bgcolor:'#fff', paper_bgcolor:'#fff',
+});
+
+// Drop-off bar
+Plotly.newPlot('chart-dropoff', [{
+  x: categories, y: drop, type:'bar',
+  marker:{ color: drop.map(v => v > 40 ? '#c62828' : v > 35 ? '#ff9800' : '#1976d2') },
+  text: drop.map(v => v+'%'), textposition:'outside',
+}], {
+  height:320,
+  margin:{t:30,b:100,l:50,r:20},
+  xaxis:{tickangle:-30},
+  yaxis:{title:'% Reduction in Hits', range:[0,55]},
+  plot_bgcolor:'#fff', paper_bgcolor:'#fff',
+  showlegend: false,
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+% ============================================================
+%  Chapter 1 — Introduction & Background
+%  Thesis: Detection of the pathogenicity in the clinical
+%          microbial Nanopore sequencing
+%
+%  HOW TO USE:
+%  - Paste this file into your Overleaf project
+%  - Add \input{introduction} in your main.tex
+%  - Replace every TODO comment with the real content
+%  - Add your bibliography entries (BibTeX keys are shown next to \cite{})
+% ============================================================
+
+\chapter{Introduction}
+
+\section{Clinical Microbiology and Infectious Disease Diagnosis}
+
+Infectious diseases remain a leading cause of morbidity and mortality worldwide,
+accounting for a significant proportion of hospital admissions and intensive care
+unit stays~\cite{TODO_WHO_infectious_disease}. Rapid and accurate identification
+of the causative pathogen is essential for guiding antibiotic therapy, preventing
+the spread of infection, and improving patient outcomes.
+
+Traditional diagnostic workflows in clinical microbiology rely on culture-based
+methods, which, despite their established reliability, suffer from several
+limitations. Bacterial culture typically requires 24 to 72 hours to yield a
+result, and many clinically relevant organisms are fastidious or entirely
+unculturable under standard laboratory conditions~\cite{TODO_culture_limitations}.
+During this waiting period, clinicians are often forced to prescribe broad-spectrum
+antibiotics empirically, a practice that contributes to the global problem of
+antimicrobial resistance (AMR)~\cite{TODO_AMR_global}.
+
+\section{Next-Generation Sequencing in Clinical Practice}
+
+Next-generation sequencing (NGS) technologies have transformed microbiology by
+enabling the direct sequencing of genetic material from clinical samples, bypassing
+the need for culture. Metagenomic sequencing in particular allows the simultaneous
+detection of bacteria, viruses, fungi, and parasites from a single sequencing run,
+providing a comprehensive view of the microbial content of a sample~\cite{TODO_metagenomics_review}.
+
+Short-read sequencing platforms, such as Illumina, dominate the current NGS
+landscape. However, the short read lengths produced by these platforms
+(typically 150--300 base pairs) pose challenges for resolving complex genomic
+regions, mobile genetic elements, and structural variants that are often associated
+with virulence and antibiotic resistance~\cite{TODO_shortread_limitations}.
+
+\section{Oxford Nanopore Sequencing}
+
+Oxford Nanopore Technology (ONT) is a third-generation sequencing platform that
+produces long reads — typically ranging from several kilobases to over one megabase
+in length — by measuring changes in ionic current as a DNA or RNA strand passes
+through a nanoscale protein pore~\cite{TODO_ONT_original}. This approach confers
+several advantages that are particularly relevant in a clinical context:
+
+\begin{itemize}
+    \item \textbf{Speed.} Sequencing results can be obtained within hours of sample
+          collection, enabling real-time clinical decision-making~\cite{TODO_ONT_speed}.
+    \item \textbf{Long reads.} Read lengths of tens of kilobases allow complete
+          assembly of plasmids and mobile genetic elements carrying resistance genes,
+          which are often fragmented or misassembled by short-read technologies.
+    \item \textbf{Portability and low cost.} The MinION device, weighing less than
+          100 grams, can be operated at the point of care, in field settings, or in
+          resource-limited environments where large sequencing infrastructure is
+          unavailable~\cite{TODO_MinION_pointofcare}.
+\end{itemize}
+
+Despite these advantages, Nanopore sequencing is characterised by a higher per-base
+error rate (approximately 5--10\% in recent chemistry generations) compared to
+Illumina~\cite{TODO_nanopore_accuracy}. This must be accounted for in downstream
+bioinformatics analyses, for example by using alignment parameters tuned for
+long reads with elevated mismatch rates.
+
+\section{Pathogenicity and Virulence}
+
+Pathogenicity is defined as the ability of a microorganism to cause disease in a
+susceptible host. It is not a binary property but rather a complex phenotype
+determined by the combined action of multiple genes distributed across the
+genome~\cite{TODO_pathogenicity_definition}.
+
+Virulence factors are the molecular mechanisms through which a pathogen causes
+damage to the host. These include, but are not limited to:
+
+\begin{itemize}
+    \item \textbf{Adhesins and pili} — enable the bacterium to attach to host tissues.
+    \item \textbf{Toxins (exotoxins and endotoxins)} — disrupt host cell function or
+          trigger damaging immune responses.
+    \item \textbf{Secretion systems (Type I–VI)} — inject effector proteins directly
+          into host cells to subvert immune defences.
+    \item \textbf{Iron acquisition systems} — allow the pathogen to scavenge iron from
+          the host, which is essential for growth.
+    \item \textbf{Capsules and immune evasion factors} — protect the bacterium from
+          phagocytosis and complement-mediated killing.
+    \item \textbf{Biofilm formation} — enables persistent colonisation on tissues and
+          implanted medical devices.
+\end{itemize}
+
+Because virulence is encoded across many, often distant genomic loci, and because
+individual genes may be horizontally transferred between species on mobile genetic
+elements, detecting pathogenicity requires a genome-wide analysis rather than
+the identification of a single marker gene~\cite{TODO_HGT_virulence}.
+
+\section{Virulence Factor and Antibiotic Resistance Databases}
+
+Two curated public databases underpin the computational detection of virulence
+and resistance genes:
+
+\textbf{VFDB (Virulence Factor Database)}~\cite{TODO_VFDB_citation} is a manually curated
+repository of virulence-associated sequences from experimentally verified pathogenic
+organisms. It is organised into functional categories including adherence, motility,
+toxin production, secretion systems, iron acquisition, immune evasion, biofilm, and
+invasion. In this work, VFDB was used as the primary reference for virulence gene
+detection.
+% TODO: Add exact download date and sequence count here, e.g.:
+% The version used in this work was downloaded on [DATE] and contained
+% [N] protein sequences across [M] functional categories.
+
+\textbf{CARD (Comprehensive Antibiotic Resistance Database)}~\cite{TODO_CARD_citation}
+provides a curated collection of antibiotic resistance genes (ARGs) and their
+associated mechanisms. CARD is used in this work to assess the antimicrobial
+resistance potential of the sequenced microbiome, which is a key component of
+clinical pathogenicity assessment.
+
+\section{Computational Detection of Pathogenicity from Nanopore Data}
+
+The bioinformatics workflow for detecting virulence genes from Nanopore sequencing
+data involves several steps. First, gene-coding regions are predicted on the raw
+long reads using tools such as Prodigal~\cite{TODO_prodigal} or its Python
+bindings, Pyrodigal. Predicted coding sequences are then translated into protein
+sequences and aligned against the VFDB protein database using DIAMOND
+\textit{blastx}~\cite{TODO_diamond}, which natively handles the translation step
+from nucleotide queries to protein references.
+
+The resulting alignments are evaluated according to several quality metrics:
+percent identity, alignment length, query coverage, and bit score. Thresholds on
+these metrics are selected based on the observed score distributions (see
+Chapter~\ref{ch:methods}) to distinguish biologically meaningful hits from
+spurious low-quality alignments.
+
+Virulence hits are then grouped into functional categories and quantified using
+TPM (Transcripts Per Million) normalisation, which allows abundance comparisons
+across samples with different total sequencing depths~\cite{TODO_TPM}.
+
+\section{Aims of This Work}
+
+The primary aim of this thesis is to develop a computational pipeline that:
+
+\begin{enumerate}
+    \item Accepts Nanopore long-read sequencing data (FASTA format) as input.
+    \item Detects and quantifies virulence-associated genes by alignment against VFDB.
+    \item Detects and quantifies antibiotic resistance genes by alignment against CARD.
+    \item Classifies the detected genes into functional pathogenicity categories.
+    \item Assigns a clinically interpretable risk level to each sample.
+    \item Enables comparative analysis across multiple samples to assess changes in
+          virulence content over time or across conditions.
+\end{enumerate}
+
+A secondary aim is to explore the feasibility of using large language models (LLMs)
+and protein language models as an alternative, alignment-free approach to virulence
+classification, and to compare its performance against the alignment-based pipeline.
+
+The remainder of this thesis is structured as follows.
+Chapter~\ref{ch:methods} describes the materials and methods.
+% TODO: add remaining chapter descriptions once you have the structure
