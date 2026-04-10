@@ -211,6 +211,13 @@ class DatabaseManager:
         mean_read_length: float = 0.0,
         n50: int = 0,
         mean_gc_content: float = 0.0,
+        assembly_performed: bool = False,
+        assembly_path: Optional[str] = None,
+        assembly_contigs: int = 0,
+        assembly_n50: Optional[int] = None,
+        assembly_total_bases: Optional[int] = None,
+        assembly_mean_contig_length: Optional[float] = None,
+        assembly_status: str = "skipped",
     ) -> Sample:
         session = self._session()
         try:
@@ -228,6 +235,13 @@ class DatabaseManager:
                 mean_read_length=mean_read_length,
                 n50=n50,
                 mean_gc_content=mean_gc_content,
+                assembly_performed=assembly_performed,
+                assembly_path=assembly_path,
+                assembly_contigs=assembly_contigs,
+                assembly_n50=assembly_n50,
+                assembly_total_bases=assembly_total_bases,
+                assembly_mean_contig_length=assembly_mean_contig_length,
+                assembly_status=assembly_status,
             )
             session.add(sample)
             session.commit()

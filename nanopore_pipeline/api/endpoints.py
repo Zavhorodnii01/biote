@@ -130,6 +130,10 @@ class PipelineRunOut(BaseModel):
     profiles: list[ClassificationOut]
     report_path: str | None
     json_path: str | None
+    assembly_performed: bool = False
+    assembly_contigs: int | None = None
+    assembly_n50: int | None = None
+    assembly_status: str | None = None
 
 
 # ── Health check ──────────────────────────────────────────────────────────────
@@ -149,15 +153,18 @@ async def run_pipeline(
     tool: str = Query("blastn", enum=["blastn", "diamond"]),
     skip_vf: bool = False,
     skip_amr: bool = False,
+    perform_assembly: bool = False,
 ):
     """
     Full pipeline: upload a FASTA file and get back pathogenicity classification.
 
     1. Computes read statistics (count, N50, GC content)
-    2. Aligns reads against VFDB (virulence factors)
-    3. Aligns reads against CARD (antibiotic resistance)
-    4. Classifies hits into pathogenicity categories with TPM
-    5. Generates interactive HTML reports and JSON export
+    1.5. (Optional) Performs Flye assembly to reduce read overlap inflation
+    2. Registers sample metadata in database
+    3. Aligns reads (or contigs) against VFDB (virulence factors)
+    4. Aligns reads (or contigs) against CARD (antibiotic resistance)
+    5. Classifies hits into pathogenicity categories with TPM
+    6. Generates interactive HTML reports and JSON export
     """
     # Save uploaded FASTA
     dest = settings.SAMPLES_DIR / file.filename
@@ -173,6 +180,7 @@ async def run_pipeline(
         alignment_tool=tool,
         skip_vf=skip_vf,
         skip_amr=skip_amr,
+        perform_assembly=perform_assembly,
     )
 
     return PipelineRunOut(
@@ -200,6 +208,10 @@ async def run_pipeline(
         ],
         report_path=str(result.report_path) if result.report_path else None,
         json_path=str(result.json_path) if result.json_path else None,
+        assembly_performed=perform_assembly,
+        assembly_contigs=result.assembly_result.contigs if result.assembly_result and result.assembly_result.success else None,
+        assembly_n50=result.assembly_result.n50 if result.assembly_result and result.assembly_result.success else None,
+        assembly_status="success" if result.assembly_result and result.assembly_result.success else ("failed" if result.assembly_result else "skipped"),
     )
 
 

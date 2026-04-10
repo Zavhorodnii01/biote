@@ -10,7 +10,7 @@ from datetime import datetime, timezone
 
 from sqlalchemy import (
     Column, Integer, String, Float, Text, DateTime, Boolean,
-    ForeignKey, Index, create_engine, Enum,
+    ForeignKey, Index, create_engine, Enum, JSON,
 )
 from sqlalchemy.orm import declarative_base, relationship, sessionmaker
 
@@ -94,6 +94,7 @@ class Sample(Base):
 
     hits = relationship("AlignmentHit", back_populates="sample")
     classifications = relationship("ClassificationResult", back_populates="sample")
+    evaluations = relationship("EvaluationResult", back_populates="sample")
 
 
 class AlignmentHit(Base):
@@ -157,4 +158,43 @@ class ClassificationResult(Base):
     )
 
 
-# ── Engine / session factory ──────────────────
+# ── Ground truth evaluation table ────────────────────────────────────────────
+
+class EvaluationResult(Base):
+    """Per-category recall from Test 4 (ground truth GFF comparison)."""
+
+    __tablename__ = "evaluation_results"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    sample_id = Column(Integer, ForeignKey("samples.id"), nullable=False, index=True)
+    category = Column(String(64), nullable=False)
+    expected_count = Column(Integer, default=0)   # genes in GFF annotation
+    found_count = Column(Integer, default=0)       # genes detected by pipeline
+    recall = Column(Float, default=0.0)            # found / expected
+    missed_genes = Column(JSON, nullable=True)     # list of gene names missed
+    found_genes = Column(JSON, nullable=True)      # list of gene names found
+    failure_reason = Column(String(64), nullable=True)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+
+    sample = relationship("Sample", back_populates="evaluations")
+
+    __table_args__ = (
+        Index("ix_eval_sample_cat", "sample_id", "category"),
+    )
+
+
+# ── Engine / session factory ─────────────────────────────────────────────────
+
+def get_engine(url: str = DATABASE_URL):
+    return create_engine(url, echo=False, future=True)
+
+
+def get_session_factory(url: str = DATABASE_URL):
+    engine = get_engine(url)
+    return sessionmaker(bind=engine, expire_on_commit=False)
+
+
+def init_db(url: str = DATABASE_URL):
+    engine = get_engine(url)
+    Base.metadata.create_all(engine)
+    return engine

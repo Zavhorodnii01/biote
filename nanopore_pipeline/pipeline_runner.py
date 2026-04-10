@@ -21,6 +21,7 @@ from typing import Optional
 from config import settings
 from nanopore_pipeline.db.manager import DatabaseManager
 from nanopore_pipeline.alignment.wrapper import AlignmentWrapper
+from nanopore_pipeline.assembly.flye_wrapper import FlyeAssembler, AssemblyResult
 from nanopore_pipeline.classifier.pathogenicity import PathogenicityClassifier, CategoryProfile
 from nanopore_pipeline.reporter.visualisation import PathogenicityReporter
 from nanopore_pipeline.utils.fasta_parser import compute_fasta_stats, FastaStats
@@ -39,6 +40,7 @@ class PipelineResult:
     profiles: list[CategoryProfile]
     report_path: Optional[Path]
     json_path: Optional[Path]
+    assembly_result: Optional[AssemblyResult] = None
 
 
 class PipelineRunner:
@@ -46,6 +48,7 @@ class PipelineRunner:
     def __init__(self, db_url: str = settings.DATABASE_URL):
         self.db = DatabaseManager(db_url)
         self.aligner = AlignmentWrapper(db_url)
+        self.assembler = FlyeAssembler()
         self.classifier = PathogenicityClassifier(db_url)
         self.reporter = PathogenicityReporter()
         logger.info("PipelineRunner initialised")
@@ -61,6 +64,7 @@ class PipelineRunner:
         skip_vf: bool = False,
         skip_amr: bool = False,
         word_size: int = 7,
+        perform_assembly: bool = False,
     ) -> PipelineResult:
         fasta_path = Path(fasta_path)
         if not fasta_path.exists():
@@ -75,6 +79,31 @@ class PipelineRunner:
             stats.mean_read_length, stats.n50, stats.mean_gc_content,
         )
 
+        # ── Step 1.5: Assembly (OPTIONAL) ─────────────────────────────────
+        assembly_result: Optional[AssemblyResult] = None
+        alignment_input_path = fasta_path  # Default: use raw reads
+
+        if perform_assembly:
+            logger.info("Step 1.5/6: Assembling reads with Flye")
+            assembly_dir = settings.ASSEMBLIES_DIR / sample_name
+            assembly_result = self.assembler.assemble(
+                input_fasta=fasta_path,
+                output_dir=assembly_dir,
+                sample_name=sample_name,
+            )
+
+            if assembly_result.success:
+                logger.info(
+                    "Assembly successful: %d contigs, N50=%d",
+                    assembly_result.contigs, assembly_result.n50,
+                )
+                alignment_input_path = assembly_result.contig_path
+            else:
+                logger.error("Assembly failed: %s", assembly_result.error_message)
+                logger.warning("Falling back to raw reads for alignment")
+        else:
+            logger.info("Step 1.5/6: Skipping assembly (using raw reads)")
+
         # ── Step 2: Register sample ──────────────────────────────────────
         logger.info("Step 2/6: Registering sample '%s'", sample_name)
         sample = self.db.register_sample(
@@ -86,6 +115,13 @@ class PipelineRunner:
             mean_read_length=stats.mean_read_length,
             n50=stats.n50,
             mean_gc_content=stats.mean_gc_content,
+            assembly_performed=perform_assembly,
+            assembly_path=str(assembly_result.contig_path) if assembly_result and assembly_result.success else None,
+            assembly_contigs=assembly_result.contigs if assembly_result and assembly_result.success else 0,
+            assembly_n50=assembly_result.n50 if assembly_result and assembly_result.success else None,
+            assembly_total_bases=assembly_result.total_bases if assembly_result and assembly_result.success else None,
+            assembly_mean_contig_length=assembly_result.mean_contig_length if assembly_result and assembly_result.success else None,
+            assembly_status="success" if assembly_result and assembly_result.success else ("failed" if assembly_result else "skipped"),
         )
 
         # ── Step 3: Align against VFDB ───────────────────────────────────
@@ -94,7 +130,7 @@ class PipelineRunner:
             logger.info("Step 3/6: Aligning against VFDB")
             vf_db = vfdb_blast_db or (settings.VFDB_DIR / "VFDB_setA_nt.fas.blastdb")
             vf_hits, vf_hit_rows = self.aligner.align_sample(
-                sample_path=fasta_path,
+                sample_path=alignment_input_path,
                 blast_db_path=vf_db,
                 sample_id=sample.id,
                 hit_type="VF",
@@ -119,7 +155,7 @@ class PipelineRunner:
                 settings.CARD_DIR / "nucleotide_fasta_protein_homolog_model.nucleotide_fasta_protein_homolog_model.fasta.blastdb"
             )
             amr_hits, amr_hit_rows = self.aligner.align_sample(
-                sample_path=fasta_path,
+                sample_path=alignment_input_path,
                 blast_db_path=amr_db,
                 sample_id=sample.id,
                 hit_type="AMR",
@@ -170,6 +206,7 @@ class PipelineRunner:
             profiles=profiles,
             report_path=report_path,
             json_path=json_path,
+            assembly_result=assembly_result,
         )
 
     def run_comparison(

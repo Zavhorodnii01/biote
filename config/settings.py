@@ -21,6 +21,7 @@ VFDB_DIR = DATA_DIR / "vfdb"
 CARD_DIR = DATA_DIR / "card"
 SAMPLES_DIR = DATA_DIR / "samples"
 RESULTS_DIR = DATA_DIR / "results"
+ASSEMBLIES_DIR = DATA_DIR / "assemblies"
 
 VFDB_FASTA_URL = "http://www.mgc.ac.cn/VFs/Down/VFDB_setA_nt.fas.gz"
 VFDB_PROTEIN_URL = "http://www.mgc.ac.cn/VFs/Down/VFDB_setA_pro.fas.gz"
@@ -47,6 +48,16 @@ BLAST_REWARD = 1
 BLAST_PENALTY = -1
 BLAST_GAPOPEN = 2
 BLAST_GAPEXTEND = 1
+
+# ── Assembly settings ─────────────────────────────────────────────────────────
+# Flye assembler parameters (tuned for Nanopore metagenomics)
+FLYE_GENOME_SIZE = "5m"                # 5 megabases (typical bacterial genome)
+FLYE_MIN_OVERLAP = 1000                # Minimum overlap between reads (bp)
+FLYE_ITERATIONS = 1                    # Polishing iterations (balance speed/quality)
+FLYE_THREADS = os.cpu_count() or 4
+FLYE_META_MODE = True                  # Critical for metagenomics (multiple strains)
+FLYE_MIN_READ_LENGTH = 1000            # Filter short reads before assembly
+FLYE_TIMEOUT = 3600                    # Assembly timeout in seconds (1 hour)
 
 # ── Pathogenicity classification categories ──────────────────────────────────
 VF_CATEGORIES = {
@@ -76,6 +87,34 @@ AMR_CATEGORIES = {
     "Glycopeptide Resistance": ["vancomycin", "glycopeptide", "van"],
     "Sulfonamide Resistance": ["sulfonamide", "sul1", "sul2"],
     "Efflux Pump": ["efflux", "mex", "acr", "tolc"],
+}
+
+# ── Category difficulty (bioinformatic detectability) ────────────────────────
+# Based on gene size, copy number, and mutation-level changes.
+# Easy   = large genes or multi-gene clusters (hard to miss)
+# Medium = moderately sized, identifiable with standard thresholds
+# Hard   = single-point mutations, small genes, or high sequence variability
+CATEGORY_DIFFICULTY: dict[str, str] = {
+    # VF categories
+    "Exotoxin":           "Easy",    # large toxin genes (hla, lukF, sea, seb)
+    "Motility":           "Easy",    # flagella = 7+ genes in one cluster
+    "Secretion System":   "Easy",    # multi-gene T3SS / T6SS complexes
+    "Adherence":          "Medium",  # adhesins vary in size
+    "Biofilm":            "Medium",  # quorum sensing genes moderate size
+    "Iron Uptake":        "Medium",  # siderophore biosynthesis clusters
+    "Endotoxin":          "Medium",  # LPS genes, moderate
+    "Invasion":           "Medium",  # invasins, moderate
+    "Immune Evasion":     "Hard",    # capsule genes, high variability
+    "Regulation":         "Hard",    # small regulator genes
+    # AMR categories
+    "Beta-Lactam Resistance":       "Easy",    # mecA, blaZ — large, well conserved
+    "Efflux Pump":                  "Easy",    # large multi-drug efflux operons
+    "Macrolide Resistance":         "Medium",  # erm genes, moderate
+    "Tetracycline Resistance":      "Medium",  # tet genes, moderate
+    "Glycopeptide Resistance":      "Medium",  # van cluster, moderate
+    "Sulfonamide Resistance":       "Medium",  # sul genes, moderate
+    "Aminoglycoside Resistance":    "Hard",    # aac/aph — often single mutation
+    "Fluoroquinolone Resistance":   "Hard",    # point mutations in gyrA/parC
 }
 
 # ── TPM Normalization ────────────────────────────────────────────────────────

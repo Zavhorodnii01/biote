@@ -326,6 +326,122 @@ class PathogenicityReporter:
 
         return fig
 
+    # ── Benchmark heatmap (6-test comparison) ────────────────────────────
+
+    def plot_benchmark_heatmap(
+        self,
+        test_results: list[dict],
+        save_html: bool = True,
+    ) -> go.Figure:
+        """
+        Generate a benchmark heatmap showing detection rate per category across
+        all tests (T1–T6). Requested by supervisor as replacement for bar charts.
+
+        Args:
+            test_results: list of dicts, one per test, each with:
+                {
+                  "label":      str,           e.g. "T4 MRSA RefSeq"
+                  "profiles":   list[CategoryProfile],
+                  "recall":     dict[str, float] | None,  # for ground-truth tests
+                  "difficulty": dict[str, str],            # from settings
+                }
+            save_html: write to results dir
+
+        Detection rate per cell:
+          - If recall dict is present for this test+category: use recall (0–1)
+          - Otherwise: 1.0 if category was detected (hit_count > 0), else 0.0
+        """
+        from config import settings as cfg
+
+        # Collect all categories across all tests
+        all_cats: list[str] = []
+        seen: set[str] = set()
+        for tr in test_results:
+            for p in tr["profiles"]:
+                if p.category not in seen:
+                    all_cats.append(p.category)
+                    seen.add(p.category)
+        all_cats = sorted(all_cats)
+
+        test_labels = [tr["label"] for tr in test_results]
+
+        # Build z-matrix (rows=categories, cols=tests)
+        z: list[list[float]] = []
+        text_matrix: list[list[str]] = []
+
+        difficulty_colors = {"Easy": "🟢", "Medium": "🟡", "Hard": "🔴"}
+
+        for cat in all_cats:
+            row_z: list[float] = []
+            row_text: list[str] = []
+            diff = cfg.CATEGORY_DIFFICULTY.get(cat, "Medium")
+            diff_icon = difficulty_colors.get(diff, "")
+
+            for tr in test_results:
+                recall_dict = tr.get("recall") or {}
+                profiles_map = {p.category: p for p in tr["profiles"]}
+
+                if cat in recall_dict:
+                    val = recall_dict[cat]
+                    row_z.append(val)
+                    row_text.append(f"{val * 100:.0f}%")
+                elif cat in profiles_map:
+                    row_z.append(1.0)
+                    row_text.append("✓")
+                else:
+                    row_z.append(0.0)
+                    row_text.append("—")
+
+            z.append(row_z)
+            # Prefix category label with difficulty icon
+            text_matrix.append(row_text)
+
+        # Y-axis labels: category + difficulty badge
+        y_labels = [
+            f"{cat}  [{cfg.CATEGORY_DIFFICULTY.get(cat, '?')[0]}]"
+            for cat in all_cats
+        ]
+
+        fig = go.Figure(go.Heatmap(
+            z=z,
+            x=test_labels,
+            y=y_labels,
+            text=text_matrix,
+            texttemplate="%{text}",
+            textfont={"size": 11},
+            colorscale=[
+                [0.0, "#d62728"],    # red  = not detected
+                [0.5, "#ffbb33"],    # amber = partial
+                [1.0, "#2ca02c"],    # green = fully detected
+            ],
+            zmin=0.0,
+            zmax=1.0,
+            colorbar=dict(
+                title="Detection Rate",
+                tickvals=[0, 0.5, 1],
+                ticktext=["0%", "50%", "100%"],
+            ),
+        ))
+
+        fig.update_layout(
+            title=(
+                "Benchmark Heatmap — Pathogenicity Gene Detection Rate<br>"
+                "<sup>Category difficulty: [E]=Easy  [M]=Medium  [H]=Hard | "
+                "T4 uses ground-truth GFF recall; T1–T3,T5–T6 use presence/absence</sup>"
+            ),
+            xaxis=dict(title="Test", side="bottom", tickangle=-20),
+            yaxis=dict(title="Category", autorange="reversed"),
+            height=max(500, len(all_cats) * 35 + 200),
+            margin=dict(l=220, r=80, t=120, b=80),
+        )
+
+        if save_html:
+            out = self.output_dir / "benchmark_heatmap.html"
+            fig.write_html(str(out))
+            logger.info("Saved benchmark heatmap -> %s", out)
+
+        return fig
+
     # ── JSON export ───────────────────────────────────────────────────────
 
     def export_json(
